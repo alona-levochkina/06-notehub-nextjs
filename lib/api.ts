@@ -1,10 +1,23 @@
 import axios, { type AxiosResponse } from "axios";
-import type {  Note, 
-  CreateNoteData, 
-  FetchNotesParams, 
-  FetchNotesResponse, 
-  NoteResponse,
-} from "@/types/note";
+import type { Note, CreateNoteData } from "@/types/note";
+
+export interface FetchNotesParams {
+  page?: number;
+  perPage?: number;
+  search?: string;
+}
+
+export interface FetchNotesResponse {
+  notes: Note[];
+  page: number;
+  perPage: number;
+  totalPages: number;
+  totalItems: number;
+}
+
+export interface NoteResponse {
+  note: Note;
+}
 
 const API_BASE_URL = "https://notehub-public.goit.study/api";
 const token = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
@@ -37,7 +50,7 @@ export const fetchNotes = async (
 };
 
 export const fetchNoteById = async (id: string): Promise<Note> => {
-  const response = await api.get(`/notes/${id}`);
+  const response: AxiosResponse<Note> = await api.get(`/notes/${id}`);
   return response.data;
 };
 
@@ -55,4 +68,3 @@ export const deleteNote = async (noteId: string): Promise<Note> => {
   );
   return response.data.note;
 };
-

@@ -1,6 +1,6 @@
 export interface Note {
   id: string;
-  title: string | undefined;
+  title: string;
   content: string;
   tag: NoteTag;
   createdAt: string;
@@ -13,22 +13,4 @@ export interface CreateNoteData {
   title: string;
   content: string;
   tag: NoteTag;
-}
-
-export interface FetchNotesParams {
-  page?: number;
-  perPage?: number;
-  search?: string;
-}
-
-export interface FetchNotesResponse {
-  notes: Note[];
-  page: number;
-  perPage: number;
-  totalPages: number;
-  totalItems: number;
-}
-
-export interface NoteResponse {
-  note: Note;
 }
